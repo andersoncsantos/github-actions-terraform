@@ -3,7 +3,7 @@
 }
 
 resource "aws_s3_bucket" "teste_CI" {
-  bucket = "Teste-GitHub-Actions"
+  bucket = "teste-gitHub-actions"
   acl    = "private"
 
   tags = {
