@@ -38,3 +38,6 @@ jobs:
         with:
           name: terraform
           path: ${{ github.workspace }}//resources
+
+      - name: Terraform Init
+        run: terraform init
