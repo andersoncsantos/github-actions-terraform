@@ -25,7 +25,7 @@ resource "aws_s3_bucket" "tfstate" {
 terraform {
   backend "s3" {
     bucket = "terraform-tfstate-00000001"
-    key    = "terraform/terraform.tfstate"
+    key    = "terraform.tfstate"
     region = "us-east-1"
   }
 }
