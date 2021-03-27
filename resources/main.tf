@@ -22,10 +22,10 @@ resource "aws_s3_bucket" "tfstate" {
   }
 }
 
-# terraform {
-#   backend "s3" {
-#     bucket = "teste-github-actions-00000001 tfstate"
-#     key    = "terraform/terraform.tfstate"
-#     region = "us-east-1"
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket = "terraform-tfstate-00000001"
+    key    = "terraform/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
