@@ -12,15 +12,15 @@ resource "aws_s3_bucket" "teste_CI" {
   }
 }
 
-resource "aws_s3_bucket" "tfstate" {
-  bucket = "terraform-tfstate-00000001"
-  acl    = "private"
+# resource "aws_s3_bucket" "tfstate" {
+#   bucket = "terraform-tfstate-00000001"
+#   acl    = "private"
 
-  tags = {
-    Name        = ""
-    Environment = ""
-  }
-}
+#   tags = {
+#     Name        = ""
+#     Environment = ""
+#   }
+# }
 
 terraform {
   backend "s3" {
