@@ -12,10 +12,20 @@ resource "aws_s3_bucket" "teste_CI" {
   }
 }
 
-terraform {
-  backend "s3" {
-    bucket = "teste-github-actions-00000001 tfstate"
-    key    = "terraform/terraform.tfstate"
-    region = "us-east-1"
+resource "aws_s3_bucket" "tfstate" {
+  bucket = "terraform-tfstate-00000001"
+  acl    = "private"
+
+  tags = {
+    Name        = ""
+    Environment = ""
   }
 }
+
+# terraform {
+#   backend "s3" {
+#     bucket = "teste-github-actions-00000001 tfstate"
+#     key    = "terraform/terraform.tfstate"
+#     region = "us-east-1"
+#   }
+# }
