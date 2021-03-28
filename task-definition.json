@@ -1,4 +1,4 @@
-﻿{
+{
   "ipcMode": null,
   "executionRoleArn": "arn:aws:iam::074964816138:role/ecsTaskExecutionRole",
   "containerDefinitions": [
@@ -29,7 +29,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "074964816138.dkr.ecr.us-east-1.amazonaws.com/my-first-ecr-repo",
+      "image": "074964816138.dkr.ecr.us-east-1.amazonaws.com/faturamento",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -46,15 +46,18 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "my-first-task"
+      "name": "faturamento-task"
     }
   ],
   "placementConstraints": [],
   "memory": "512",
   "taskRoleArn": null,
-  "compatibilities": ["EC2", "FARGATE"],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:074964816138:task-definition/my-first-task:1",
-  "family": "my-first-task",
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:074964816138:task-definition/faturamento-task:1",
+  "family": "faturamento-task",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -82,7 +85,9 @@
     }
   ],
   "pidMode": null,
-  "requiresCompatibilities": ["FARGATE"],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
   "networkMode": "awsvpc",
   "cpu": "256",
   "revision": 1,
