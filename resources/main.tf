@@ -138,7 +138,7 @@ resource "aws_lb_listener" "listener" {
   protocol          = "HTTP"
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.target_group.arn # Referencing our tagrte group
+    target_group_arn = aws_lb_target_group.faturamento_target_group.arn # Referencing our tagrte group
   }
 }
 
@@ -153,7 +153,7 @@ resource "aws_ecs_service" "faturamento_service" {
   desired_count   = 1 # Setting the number of containers we want deployed to 1
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.target_group.arn # Referencing our target group
+    target_group_arn = aws_lb_target_group.faturamento_target_group.arn # Referencing our target group
     container_name   = aws_ecs_task_definition.faturamento_task.family
     container_port   = 3000 # Specifying the container port
   }
