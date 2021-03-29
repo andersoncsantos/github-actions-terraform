@@ -112,9 +112,9 @@ resource "aws_alb" "application_load_balancer" {
   name               = "faturamento-lb" # Naming our load balancer
   load_balancer_type = "application"
   subnets = [ # Referencing the default subnets
-    "${aws_default_subnet.default_subnet_a.id}",
-    "${aws_default_subnet.default_subnet_b.id}",
-    "${aws_default_subnet.default_subnet_c.id}"
+    "aws_default_subnet.default_subnet_a.id",
+    "aws_default_subnet.default_subnet_b.id",
+    "aws_default_subnet.default_subnet_c.id"
   ]
   # Referencing the security group
   security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
@@ -160,9 +160,9 @@ resource "aws_ecs_service" "faturamento_service" {
 
   network_configuration {
     subnets = [
-      "${aws_default_subnet.default_subnet_a.id}",
-      "${aws_default_subnet.default_subnet_b.id}",
-      "${aws_default_subnet.default_subnet_c.id}"
+      "aws_default_subnet.default_subnet_a.id",
+      "aws_default_subnet.default_subnet_b.id",
+      "aws_default_subnet.default_subnet_c.id"
     ]
     assign_public_ip = true # Providing our containers with public IPs
   }
@@ -183,21 +183,21 @@ resource "aws_ecs_service" "faturamento_service" {
 #   }
 # }
 
-# resource "aws_s3_bucket" "tfstate" {
-#   bucket = "terraform-tfstate-00000001"
-#   acl    = "private"
-#   force_destroy = true
+resource "aws_s3_bucket" "tfstate" {
+  bucket = "terraform-tfstate-00000001"
+  acl    = "private"
+  force_destroy = true
 
-#   tags = {
-#     Name        = ""
-#     Environment = ""
-#   }
-# }
+  tags = {
+    Name        = ""
+    Environment = ""
+  }
+}
 
-# terraform {
-#   backend "s3" {
-#     bucket = "terraform-tfstate-00000001"
-#     key    = "terraform.tfstate"
-#     region = "us-east-1"
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket = "terraform-tfstate-00000001"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
+}
