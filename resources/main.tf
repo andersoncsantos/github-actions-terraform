@@ -120,8 +120,8 @@ resource "aws_alb" "application_load_balancer" {
   security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
 }
 
-resource "aws_lb_target_group" "target_group" {
-  name        = "target-group"
+resource "aws_lb_target_group" "faturamento_target_group" {
+  name        = "faturamento-target-group"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
