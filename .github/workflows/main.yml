@@ -58,7 +58,7 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply -out=s3://terraform-tfstate-00000001/old -auto-approve
+        run: terraform apply -auto-approve
 
       # - name: Terraform Destroy
       #   run: terraform destroy -auto-approve
