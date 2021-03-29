@@ -80,7 +80,7 @@ resource "aws_security_group" "service_security_group" {
     to_port   = 0
     protocol  = "-1"
     # Only allowing traffic in from the load balancer security group
-    security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
+    security_groups = [aws_security_group.load_balancer_security_group.id]
   }
 
   egress {
@@ -144,7 +144,7 @@ resource "aws_lb_listener" "listener" {
 
 resource "aws_ecs_service" "faturamento_service" {
   depends_on = [
-    "aws_alb.application_load_balancer"
+    aws_alb.application_load_balancer
   ]
   name            = "faturamento-service"                        # Naming our first service
   cluster         = aws_ecs_cluster.faturamento_cluster.id       # Referencing our created Cluster
