@@ -50,11 +50,11 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan workspaces_variables/dev.tfvars
+        run: terraform plan -var-file workspaces_variables/dev.tfvars
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply workspaces_variables/dev.tfvars -auto-approve
+        run: terraform apply -var-file workspaces_variables/dev.tfvars -auto-approve
 
       # - name: Terraform Destroy
       #   run: terraform destroy workspaces_variables/dev.tfvars -auto-approve
@@ -94,11 +94,11 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan workspaces_variables/qa.tfvars
+        run: terraform plan -var-file workspaces_variables/qa.tfvars
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply workspaces_variables/qa.tfvars -auto-approve
+        run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
 
       # - name: Terraform Destroy
       #   run: terraform destroy workspaces_variables/qa.tfvars -auto-approve
@@ -138,11 +138,11 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan workspaces_variables/prod.tfvars
+        run: terraform plan -var-file workspaces_variables/prod.tfvars
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply workspaces_variables/prod.tfvars -auto-approve
+        run: terraform apply -var-file workspaces_variables/prod.tfvars -auto-approve
 
       # - name: Terraform Destroy
       #   run: terraform destroy workspaces_variables/prod.tfvars -auto-approve
