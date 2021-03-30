@@ -1,4 +1,4 @@
-﻿name: Workspaces
+﻿name: Create Workspaces
 on:
   workflow_dispatch:
 
@@ -46,20 +46,19 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate # -no-color
-        
+        run: terraform validate
+
       - name: Workspace Dev
         id: workspace
-        run: terraform workspace delete dev
+        run: terraform workspace new dev
         continue-on-error: true
 
-#       - name: Workspace Dev
-#         id: workspace
-#         run: terraform workspace new dev
-#         continue-on-error: true
+      - name: Workspace QA
+        id: workspace
+        run: terraform workspace new qa
+        continue-on-error: true
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
-
-      # - name: Terraform Destroy
-      #   run: terraform destroy -auto-approve
+      - name: Workspace Hom
+        id: workspace
+        run: terraform workspace new hom
+        continue-on-error: true
