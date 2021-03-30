@@ -100,8 +100,8 @@ jobs:
       # - name: Terraform Apply
       #   run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
 
-      # - name: Terraform Destroy
-      #   run: terraform destroy workspaces_variables/qa.tfvars -auto-approve
+      - name: Terraform Destroy
+        run: terraform destroy -var-file workspaces_variables/qa.tfvars -auto-approve
 
   deploy-prod-infra:
     name: Deploy Infra Prod
@@ -144,5 +144,5 @@ jobs:
       # - name: Terraform Apply
       #   run: terraform apply -var-file workspaces_variables/prod.tfvars -auto-approve
 
-      # - name: Terraform Destroy
-      #   run: terraform destroy workspaces_variables/prod.tfvars -auto-approve
+      - name: Terraform Destroy
+        run: terraform destroy -var-file workspaces_variables/prod.tfvars -auto-approve
