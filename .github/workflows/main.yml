@@ -40,14 +40,15 @@ jobs:
         with:
           terraform_wrapper: false
 
-      - name: Select Workspace
-        id: select
-        run: terraform workspace select dev 
 
       - name: Terraform Init
         id: init
         run: terraform init
 
+      - name: Select Workspace
+        id: select
+        run: terraform workspace select dev
+         
       - name: Terraform Validate
         id: validate
         run: terraform validate # -no-color
