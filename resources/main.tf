@@ -5,14 +5,14 @@
 resource "aws_ecr_repository" "faturamento" {
   name = var.aws_ecr_repository_name
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
 resource "aws_ecs_cluster" "faturamento_cluster" {
   name = var.aws_ecs_cluster_name # Naming the cluster
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -31,7 +31,7 @@ resource "aws_iam_role" "faturamento_task_execution_role" {
   name               = var.aws_iam_role_name
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -60,7 +60,7 @@ resource "aws_ecs_task_definition" "faturamento_task" {
   cpu                      = 256         # Specifying the CPU our container requires
   execution_role_arn       = aws_iam_role.faturamento_task_execution_role.arn
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -85,7 +85,7 @@ resource "aws_security_group" "load_balancer_security_group" {
     cidr_blocks = ["0.0.0.0/0"] # Allowing traffic out to all IP addresses
   }
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -106,7 +106,7 @@ resource "aws_security_group" "service_security_group" {
   }
 
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -138,7 +138,7 @@ resource "aws_alb" "application_load_balancer" {
   # Referencing the security group
   security_groups = [aws_security_group.load_balancer_security_group.id]
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -153,7 +153,7 @@ resource "aws_lb_target_group" "faturamento_target_group" {
     path    = "/"
   }
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
 }
 
@@ -192,18 +192,14 @@ resource "aws_ecs_service" "faturamento_service" {
     assign_public_ip = true # Providing our containers with public IPs
   }
   tags = {
-    "Faturamento" = var.environment_name
+    "faturamento" = var.environment_name
   }
-}
-
-locals {
-  env = terraform.workspace
 }
 
 terraform {
   backend "s3" {
     bucket = "terraform-tfstate-00000001"
-    key    = "terraform${locals.env}.tfstate"
+    key    = "${var.environment_name}/terraform.tfstate"
     region = "us-east-1"
   }
 }
