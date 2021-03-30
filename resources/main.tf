@@ -198,7 +198,7 @@ resource "aws_ecs_service" "faturamento_service" {
 
 data "terraform_remote_state" "faturamento_backend" {
   backend = "s3"
-  config {
+  config = {
     bucket = "terraform-tfstate-00000001"
     key    = "${var.environment_name}/terraform.tfstate"
     region = "us-east-1"
