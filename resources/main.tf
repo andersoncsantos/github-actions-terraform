@@ -210,5 +210,6 @@ terraform {
     bucket               = "terraform-tfstate-00000001"
     key                  = "terraform.tfstate"
     region               = "us-east-1"
+     workspace_key_prefix = "tf-state"
   }
 }
