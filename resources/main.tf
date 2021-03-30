@@ -183,16 +183,16 @@ resource "aws_ecs_service" "faturamento_service" {
 #   }
 # }
 
-resource "aws_s3_bucket" "tfstate" {
-  bucket        = "terraform-tfstate-00000001"
-  acl           = "private"
-  force_destroy = true
+# resource "aws_s3_bucket" "tfstate" {
+#   bucket        = "terraform-tfstate-00000001"
+#   acl           = "private"
+#   force_destroy = true
 
-  tags = {
-    Name        = ""
-    Environment = ""
-  }
-}
+#   tags = {
+#     Name        = ""
+#     Environment = ""
+#   }
+# }
 
 terraform {
   backend "s3" {
