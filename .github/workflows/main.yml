@@ -1,9 +1,5 @@
 name: Teste GitHub Actions
 on:
-  # push:
-  #   branches: [main]
-  # pull_request:
-  #   branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -54,11 +50,99 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan # -no-color
+        run: terraform plan workspaces_variables/dev.tfvars
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply workspaces_variables/dev.tfvars -auto-approve
 
       # - name: Terraform Destroy
-      #   run: terraform destroy -auto-approve
+      #   run: terraform destroy workspaces_variables/dev.tfvars -auto-approve
+
+  deploy-qa-infra:
+    name: Deploy Infra Dev
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/resources
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: us-east-1
+
+    needs: build
+    steps:
+      - name: Download Terraform
+        uses: actions/download-artifact@v2
+        with:
+          name: terraform
+          path: ${{ github.workspace }}//resources
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate # -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan workspaces_variables/qa.tfvars
+        continue-on-error: true
+
+      - name: Terraform Apply
+        run: terraform apply workspaces_variables/qa.tfvars -auto-approve
+
+      # - name: Terraform Destroy
+      #   run: terraform destroy workspaces_variables/qa.tfvars -auto-approve
+
+  deploy-prod-infra:
+    name: Deploy Infra Dev
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/resources
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: us-east-1
+
+    needs: build
+    steps:
+      - name: Download Terraform
+        uses: actions/download-artifact@v2
+        with:
+          name: terraform
+          path: ${{ github.workspace }}//resources
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate # -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan workspaces_variables/prod.tfvars
+        continue-on-error: true
+
+      - name: Terraform Apply
+        run: terraform apply workspaces_variables/prod.tfvars -auto-approve
+
+      # - name: Terraform Destroy
+      #   run: terraform destroy workspaces_variables/prod.tfvars -auto-approve
