@@ -40,10 +40,24 @@ jobs:
         with:
           terraform_wrapper: false
 
-
       - name: Terraform Init
         id: init
         run: terraform init
+
+      - name: Dev
+        id: dev
+        run: terraform workspace new dev
+        continue-on-error: true
+
+      - name: QA
+        id: qa
+        run: terraform workspace new qa
+        continue-on-error: true
+
+      - name: Prod
+        id: prod
+        run: terraform workspace new prod
+        continue-on-error: true
 
       - name: Select Workspace
         id: select
