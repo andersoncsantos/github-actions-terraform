@@ -47,8 +47,8 @@ jobs:
 
       - name: Select Workspace
         id: select
-        run: terraform workspace select dev
-         
+        run: terraform workspace list
+
       - name: Terraform Validate
         id: validate
         run: terraform validate # -no-color
