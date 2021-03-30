@@ -1,1 +1,11 @@
 ﻿variable "region" {}
+variable "aws_ecr_repository_name" {}
+variable "environment_name" {}
+variable "aws_ecs_cluster_name" {}
+variable "aws_iam_role_name" {}
+variable "aws_ecs_task_definition_family" {}
+variable "aws_ecs_task_definition_name" {}
+variable "aws_alb_name" {}
+variable "aws_lb_target_group_name" {}
+variable "aws_ecs_service_name" {}
+variable "tfstate_name" {}
