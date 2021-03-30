@@ -208,7 +208,8 @@ resource "aws_ecs_service" "faturamento_service" {
 terraform {
   backend "s3" {
     bucket               = "terraform-tfstate-00000001"
-    workspace_key_prefix = "terraform.tfstate"
+    key                  = "terraform.tfstate"
     region               = "us-east-1"
+    workspace_key_prefix = var.environment
   }
 }
