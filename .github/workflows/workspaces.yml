@@ -49,16 +49,16 @@ jobs:
         run: terraform validate
 
       - name: Workspace Dev
-        id: workspace
+        id: dev
         run: terraform workspace new dev
         continue-on-error: true
 
       - name: Workspace QA
-        id: workspace
+        id: qa
         run: terraform workspace new qa
         continue-on-error: true
 
       - name: Workspace Hom
-        id: workspace
+        id: hom
         run: terraform workspace new hom
         continue-on-error: true
