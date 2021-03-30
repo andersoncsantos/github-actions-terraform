@@ -47,11 +47,16 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate # -no-color
-
+        
       - name: Workspace Dev
         id: workspace
-        run: terraform workspace new dev
+        run: terraform workspace delete dev
         continue-on-error: true
+
+#       - name: Workspace Dev
+#         id: workspace
+#         run: terraform workspace new dev
+#         continue-on-error: true
 
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve
