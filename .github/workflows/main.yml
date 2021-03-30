@@ -53,14 +53,14 @@ jobs:
         run: terraform plan -var-file workspaces_variables/dev.tfvars
         continue-on-error: true
 
-      - name: Terraform Apply
-        run: terraform apply -var-file workspaces_variables/dev.tfvars -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -var-file workspaces_variables/dev.tfvars -auto-approve
 
-      # - name: Terraform Destroy
-      #   run: terraform destroy workspaces_variables/dev.tfvars -auto-approve
+      - name: Terraform Destroy
+        run: terraform destroy -var-file workspaces_variables/dev.tfvars -auto-approve
 
   deploy-qa-infra:
-    name: Deploy Infra Dev
+    name: Deploy Infra QA
     runs-on: ubuntu-latest
 
     defaults:
@@ -97,14 +97,14 @@ jobs:
         run: terraform plan -var-file workspaces_variables/qa.tfvars
         continue-on-error: true
 
-      - name: Terraform Apply
-        run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
 
       # - name: Terraform Destroy
       #   run: terraform destroy workspaces_variables/qa.tfvars -auto-approve
 
   deploy-prod-infra:
-    name: Deploy Infra Dev
+    name: Deploy Infra Prod
     runs-on: ubuntu-latest
 
     defaults:
@@ -141,8 +141,8 @@ jobs:
         run: terraform plan -var-file workspaces_variables/prod.tfvars
         continue-on-error: true
 
-      - name: Terraform Apply
-        run: terraform apply -var-file workspaces_variables/prod.tfvars -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -var-file workspaces_variables/prod.tfvars -auto-approve
 
       # - name: Terraform Destroy
       #   run: terraform destroy workspaces_variables/prod.tfvars -auto-approve
