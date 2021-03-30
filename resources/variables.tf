@@ -9,4 +9,4 @@ variable "aws_alb_name" {}
 variable "aws_lb_target_group_name" {}
 variable "aws_ecs_service_name" {}
 variable "tfstate_name" {}
-variable "tfstate" {}
+variable "path" {}
