@@ -8,3 +8,8 @@ aws_ecs_task_definition_name = "faturamento-task-dev"
 aws_alb_name = "faturamento-lb-dev"
 aws_lb_target_group_name = "faturamento-target-group-dev"
 aws_ecs_service_name = "faturamento-service-dev"
+backend "s3" {
+    bucket = "terraform-tfstate-00000001"
+    key    = "dev/terraform.tfstate"
+    region = "us-east-1"
+}
