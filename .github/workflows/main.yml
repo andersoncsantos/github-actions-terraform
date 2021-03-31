@@ -57,65 +57,69 @@ jobs:
         id: validate
         run: terraform validate
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -var-file workspaces_variables/dev.tfvars
-      #   continue-on-error: true
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -var-file workspaces_variables/dev.tfvars
+        continue-on-error: true
 
-      # - name: Terraform Apply
-      #   run: terraform apply -var-file workspaces_variables/dev.tfvars -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -var-file workspaces_variables/dev.tfvars -auto-approve
 
-      - name: Terraform Destroy
-        run: terraform destroy -var-file workspaces_variables/dev.tfvars -auto-approve
+      # - name: Terraform Destroy
+      #   run: terraform destroy -var-file workspaces_variables/dev.tfvars -auto-approve
 
-  # deploy-qa-infra:
-  #   name: Deploy Infra QA
-  #   runs-on: ubuntu-latest
+  deploy-qa-infra:
+    name: Deploy Infra QA
+    runs-on: ubuntu-latest
 
-  #   defaults:
-  #     run:
-  #       working-directory: ${{ github.workspace }}/resources
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/resources
 
-  #   env:
-  #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #     AWS_REGION: us-east-1
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: us-east-1
 
-  #   needs: build
-  #   steps:
-  #     - name: Download Terraform
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: terraform
-  #         path: ${{ github.workspace }}//resources
+    needs: build
+    steps:
+      - name: Download Terraform
+        uses: actions/download-artifact@v2
+        with:
+          name: terraform
+          path: ${{ github.workspace }}//resources
 
-  #     - uses: hashicorp/setup-terraform@v1
-  #       with:
-  #         terraform_wrapper: false
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
 
-  #     - name: Terraform Init
-  #       id: init
-  #       run: terraform init
+      - name: Terraform Init
+        id: init
+        run: terraform init
         
-        # - name: QA
-        #       id: qa
-        #       run: terraform workspace new qa
-        #       continue-on-error: true
+      - name: QA
+        id: qa
+        run: terraform workspace new qa
+        continue-on-error: true
 
-  #     - name: Terraform Validate
-  #       id: validate
-  #       run: terraform validate # -no-color
+      - name: Select Workspace
+        id: select
+        run: terraform workspace select qa
 
-  #     # - name: Terraform Plan
-  #     #   id: plan
-  #     #   run: terraform plan -var-file workspaces_variables/qa.tfvars
-  #     #   continue-on-error: true
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
 
-  #     # - name: Terraform Apply
-  #     #   run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -var-file workspaces_variables/qa.tfvars
+        continue-on-error: true
+
+      - name: Terraform Apply
+        run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
       
-  #     - name: Terraform Destroy
-  #       run: terraform destroy -var-file workspaces_variables/qa.tfvars -auto-approve
+      # - name: Terraform Destroy
+      #   run: terraform destroy -var-file workspaces_variables/qa.tfvars -auto-approve
 
   # deploy-prod-infra:
   #   name: Deploy Infra Prod
