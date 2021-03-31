@@ -1,4 +1,4 @@
-region = "us-east-1"
+region = "sa-east-1"
 aws_ecr_repository_name = "faturamento-qa"
 environment_name = "QA"
 aws_ecs_cluster_name = "faturamento-cluster-qa"
