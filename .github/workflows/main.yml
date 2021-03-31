@@ -55,7 +55,7 @@ jobs:
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate # -no-color
+        run: terraform validate
 
       - name: Terraform Plan
         id: plan
@@ -97,10 +97,10 @@ jobs:
   #       id: init
   #       run: terraform init
         
-        - name: QA
-              id: qa
-              run: terraform workspace new qa
-              continue-on-error: true
+        # - name: QA
+        #       id: qa
+        #       run: terraform workspace new qa
+        #       continue-on-error: true
 
   #     - name: Terraform Validate
   #       id: validate
