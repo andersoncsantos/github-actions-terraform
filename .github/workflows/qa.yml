@@ -57,13 +57,13 @@ jobs:
         id: validate
         run: terraform validate
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -var-file workspaces_variables/qa.tfvars
-        continue-on-error: true
+      # - name: Terraform Plan
+      #   id: plan
+      #   run: terraform plan -var-file workspaces_variables/qa.tfvars
+      #   continue-on-error: true
 
-      - name: Terraform Apply
-        run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
+      # - name: Terraform Apply
+      #   run: terraform apply -var-file workspaces_variables/qa.tfvars -auto-approve
 
-      # - name: Terraform Destroy
-      #   run: terraform destroy -var-file workspaces_variables/qa.tfvars -auto-approve
+      - name: Terraform Destroy
+        run: terraform destroy -var-file workspaces_variables/qa.tfvars -auto-approve
